@@ -18,7 +18,7 @@ class MainSimulation extends Simulation {
         exec(
           LettersService.create,
           LettersService.checkStatus,
-          pause(1.second)
+          pause(500.milliseconds)
         )
       )
       .inject(

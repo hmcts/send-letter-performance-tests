@@ -21,7 +21,7 @@ object LettersService {
             "ServiceAuthorization" -> "Bearer ${service_token}",
             ContentType -> ApplicationJson
           ))
-          .body(StringBody(
+          .body(StringBody( //TODO: read real template from json
             """
               |{
               |  "documents": [

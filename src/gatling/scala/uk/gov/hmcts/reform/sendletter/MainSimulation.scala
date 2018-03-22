@@ -14,15 +14,15 @@ class MainSimulation extends Simulation {
   setUp(
     scenario("Create letters")
       .exec(S2s.leaseServiceToken)
-      .during(60.seconds)(
+      .during(1.hour)(
         exec(
           LettersService.create,
           LettersService.checkStatus,
-          pause(500.milliseconds)
+          pause(40.seconds, 60.seconds)
         )
       )
       .inject(
-        rampUsers(10).over(5.seconds)
+        rampUsers(1000).over(20.minutes)
       )
   ).protocols(http.baseURL(config.getString("baseUrl")))
 }

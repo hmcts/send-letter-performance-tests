@@ -13,4 +13,5 @@ repositories {
 
 dependencies {
   compile 'org.scala-lang:scala-library:2.11.8'
+  gatlingCompile 'com.warrenstrange:googleauth:1.1.2'
 }

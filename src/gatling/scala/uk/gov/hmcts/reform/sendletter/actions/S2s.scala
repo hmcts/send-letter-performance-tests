@@ -12,15 +12,27 @@ object S2s {
 
   private val authenticator: GoogleAuthenticator = new GoogleAuthenticator()
 
-  private val otpFeeder = Iterator.continually(Map("otp" -> authenticator.getTotpPassword(config.getString("service.pass"))))
+  private val credsFeeder =
+    Iterator.continually(
+      Map(
+        "otp" -> authenticator.getTotpPassword(config.getString("service.pass")),
+        "name" -> config.getString("service.name")
+      )
+    )
 
   val leaseServiceToken: ChainBuilder =
-    feed(otpFeeder)
+    feed(credsFeeder)
       .exec(
         sendletter.applyOptionalProxy(
           http("Lease service token")
             .post(config.getString("s2sUrl") + "/lease")
-            .body(StringBody("""{"microservice":"""" + config.getString("service.name") + """","oneTimePassword":"${otp}"}"""))
+            .body(StringBody(
+              """
+                |{
+                |  "microservice": "${name}",
+                |  "oneTimePassword": "${otp}"
+                |}
+              """.stripMargin))
             .asJSON
             .check(bodyString.saveAs("service_token"))
         )

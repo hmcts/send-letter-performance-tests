@@ -10,7 +10,7 @@ import uk.gov.hmcts.reform.sendletter
 object S2s {
   private val config = ConfigFactory.load()
 
-  private val authenticator: GoogleAuthenticator = new GoogleAuthenticator()
+  private val authenticator = new GoogleAuthenticator()
 
   private val credsFeeder =
     Iterator.continually(
@@ -32,7 +32,8 @@ object S2s {
                 |  "microservice": "${name}",
                 |  "oneTimePassword": "${otp}"
                 |}
-              """.stripMargin))
+              """.stripMargin
+            ))
             .asJSON
             .check(bodyString.saveAs("service_token"))
         )

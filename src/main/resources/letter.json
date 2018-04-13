@@ -1,0 +1,17 @@
+{
+  "documents": [
+    {
+      "template": "<html>hello {{foo}}</html>",
+      "values": {
+        "foo": "${uuid}"
+      }
+    },
+    {
+      "template": "<html>hello again {{foo}}</html>",
+      "values": {
+        "foo": "bar"
+      }
+    }
+  ],
+  "type": "someType"
+}

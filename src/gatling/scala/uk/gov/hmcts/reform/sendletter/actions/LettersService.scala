@@ -9,9 +9,13 @@ import io.gatling.http.HeaderValues._
 import io.gatling.http.Predef._
 import uk.gov.hmcts.reform.sendletter
 
+import scala.io.Source
+
 object LettersService {
 
   private val uuidFeeder = Iterator.continually(Map("uuid" -> UUID.randomUUID.toString))
+
+  private val letterJson = Source.fromResource("letter.json").getLines().mkString
 
   val create: ChainBuilder =
     feed(uuidFeeder)
@@ -23,27 +27,7 @@ object LettersService {
               "ServiceAuthorization" -> "Bearer ${service_token}",
               ContentType -> ApplicationJson
             ))
-            .body(StringBody( //TODO: read real template from json
-              """
-                |{
-                |  "documents": [
-                |    {
-                |      "template": "<html>hello {{foo}}</html>",
-                |      "values": {
-                |        "foo": "${uuid}"
-                |      }
-                |    },
-                |    {
-                |      "template": "<html>hello again {{foo}}</html>",
-                |      "values": {
-                |        "foo": "bar"
-                |      }
-                |    }
-                |  ],
-                |  "type": "someType"
-                |}
-              """.stripMargin
-            ))
+            .body(StringBody(letterJson))
             .check(
               status.is(200),
               jsonPath("$.letter_id").saveAs("id")

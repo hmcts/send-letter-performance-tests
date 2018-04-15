@@ -16,8 +16,12 @@ object LettersService {
   private val uuidFeeder = Iterator.continually(Map("uuid" -> UUID.randomUUID.toString))
 
   private val letterJson = Source.fromResource("letter.json").getLines().mkString
+  private val letterWithPdfs = Source.fromResource("letter-with-pdfs.json").getLines().mkString
 
-  val create: ChainBuilder =
+  val createV1: ChainBuilder = create(letterJson, "application/json")
+  val createV2: ChainBuilder = create(letterWithPdfs, "application/vnd.uk.gov.hmcts.letter-service.in.letter.v2+json")
+
+  private def create(payload: String, mediaType: String): ChainBuilder = {
     feed(uuidFeeder)
       .exec(
         sendletter.applyOptionalProxy(
@@ -25,15 +29,16 @@ object LettersService {
             .post("/letters")
             .headers(Map(
               "ServiceAuthorization" -> "Bearer ${service_token}",
-              ContentType -> ApplicationJson
+              ContentType -> mediaType
             ))
-            .body(StringBody(letterJson))
+            .body(StringBody(payload))
             .check(
               status.is(200),
               jsonPath("$.letter_id").saveAs("id")
             )
         )
       )
+  }
 
   val checkStatus: ChainBuilder =
     exec(

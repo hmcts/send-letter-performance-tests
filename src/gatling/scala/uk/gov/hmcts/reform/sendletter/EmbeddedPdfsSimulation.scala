@@ -7,22 +7,23 @@ import uk.gov.hmcts.reform.sendletter.actions.{LettersService, S2s}
 
 import scala.concurrent.duration._
 
-class MainSimulation extends Simulation {
+class EmbeddedPdfsSimulation extends Simulation {
 
   val config: Config = ConfigFactory.load()
 
   setUp(
-    scenario("Create letters v1")
+    scenario("Create letters v2")
       .exec(S2s.leaseServiceToken)
-      .during(40.minutes)(
+      .during(5.minutes)(
         exec(
-          LettersService.createV1,
+          LettersService.createV2,
           LettersService.checkStatus,
-          pause(40.seconds, 60.seconds)
+          pause(1.seconds, 2.seconds)
         )
       )
       .inject(
-        rampUsers(1000).over(20.minutes)
+        rampUsers(50).over(5.seconds)
       )
   ).protocols(http.baseURL(config.getString("baseUrl")))
+
 }

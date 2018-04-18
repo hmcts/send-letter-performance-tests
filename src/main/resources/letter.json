@@ -13,5 +13,8 @@
       }
     }
   ],
-  "type": "someType"
+  "type": "performanceTest",
+  "additional_data": {
+    "info": "This letter was created by performance test"
+  }
 }

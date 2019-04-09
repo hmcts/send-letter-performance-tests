@@ -14,7 +14,7 @@ class MainSimulation extends Simulation {
   setUp(
     scenario("Create letters v1")
       .exec(S2s.leaseServiceToken)
-      .during(40.minutes)(
+      .during(2.minutes)(
         exec(
           LettersService.createV1,
           LettersService.checkStatus,
@@ -22,7 +22,7 @@ class MainSimulation extends Simulation {
         )
       )
       .inject(
-        rampUsers(1000).over(20.minutes)
+        rampUsers(1000).over(1.minutes)
       )
   ).protocols(http.baseURL(config.getString("baseUrl")))
 }

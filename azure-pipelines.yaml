@@ -30,3 +30,7 @@ jobs:
       S2S_URL: http://rpe-service-auth-provider.service.core-compute-aat.internal
       SERVICE_NAME: send_letter_tests
       SERVICE_PASS: $(microservicekey-send-letter-tests)
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'gatlingReport'
+      targetPath: 'build/reports'

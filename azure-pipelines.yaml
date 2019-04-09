@@ -1,0 +1,32 @@
+name: send-letter-perf-test
+trigger: none
+pr: none
+variables:
+  keyvaultName: 's2s-aat'
+  serviceConnection: 'azurerm-nonprod'
+
+jobs:
+- job: SendLetterPerfTests
+  pool:
+    name: hmcts-agent-pool
+  workspace:
+    clean: all
+  steps:
+  - task: AzureKeyVault@1
+    displayName: 'Get secrets from Keyvault'
+    inputs:
+      azureSubscription: $(serviceConnection)
+      keyVaultName: $(keyvaultName)
+      secretsFilter: 'microservicekey-send-letter-tests'
+  - task: Bash@3
+    displayName: 'Execute Gatling Tests'
+    inputs:
+      targetType: inline
+      failOnStderr: true
+      script: |
+        ./gradlew gatlingRun-uk.gov.hmcts.reform.sendletter.MainSimulation
+    env:
+      BASE_URL: http://rpe-send-letter-service.service.core-compute-aat.internal
+      S2S_URL: http://rpe-service-auth-provider.service.core-compute-aat.internal
+      SERVICE_NAME: send_letter_tests
+      SERVICE_PASS: $(microservicekey-send-letter-tests)

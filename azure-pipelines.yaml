@@ -22,7 +22,7 @@ jobs:
     displayName: 'Execute Gatling Tests'
     inputs:
       targetType: inline
-      failOnStderr: true
+      failOnStderr: false
       script: |
         ./gradlew gatlingRun-uk.gov.hmcts.reform.sendletter.MainSimulation
     env:

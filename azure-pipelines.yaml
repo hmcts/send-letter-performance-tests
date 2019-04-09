@@ -24,7 +24,7 @@ jobs:
       targetType: inline
       failOnStderr: false
       script: |
-        ./gradlew gatlingRun-uk.gov.hmcts.reform.sendletter.MainSimulation
+        ./gradlew --no-daemon gatlingRun-uk.gov.hmcts.reform.sendletter.MainSimulation
     env:
       BASE_URL: http://rpe-send-letter-service.service.core-compute-aat.internal
       S2S_URL: http://rpe-service-auth-provider.service.core-compute-aat.internal

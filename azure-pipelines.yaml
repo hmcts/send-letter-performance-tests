@@ -2,7 +2,7 @@ name: send-letter-perf-test
 trigger: none
 pr: none
 variables:
-  keyvaultName: 's2s-aat'
+  keyvaultName: 's2s-sprod'
   serviceConnection: 'azurerm-nonprod'
 
 jobs:
@@ -26,8 +26,8 @@ jobs:
       script: |
         ./gradlew --no-daemon gatlingRun-uk.gov.hmcts.reform.sendletter.MainSimulation
     env:
-      BASE_URL: http://rpe-send-letter-service.service.core-compute-aat.internal
-      S2S_URL: http://rpe-service-auth-provider.service.core-compute-aat.internal
+      BASE_URL: https://rpe-send-letter-service-sprod.service.core-compute-sprod.internal
+      S2S_URL: https://rpe-service-auth-provider-sprod.service.core-compute-sprod.internal
       SERVICE_NAME: send_letter_tests
       SERVICE_PASS: $(microservicekey-send-letter-tests)
   - task: PublishPipelineArtifact@0

@@ -1,0 +1,26 @@
+#!groovy
+properties([
+  pipelineTriggers([cron('H 2 * * *')])
+])
+
+@Library("Infrastructure") _
+
+withNightlyPipeline('java', 'rpe', 'send-letter') {
+
+  env.BASE_URL = 'https://rpe-send-letter-service-perftest.service.core-compute-perftest.internal'
+  env.S2S_URL = 'https://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal'
+  env.SERVICE_NAME = 'send_letter_tests'
+
+  setVaultName("rpe-send-letter")
+  loadVaultSecrets([
+    [
+      $class     : 'AzureKeyVaultSecret',
+      secretType : 'Secret',
+      name       : 'test-s2s-secret',
+      version    : '',
+      envVariable: 'SERVICE_PASS'
+    ]
+  ])
+
+  enablePerformanceTest()
+}

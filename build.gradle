@@ -11,6 +11,12 @@ repositories {
   jcenter()
 }
 
+gatling {
+  simulations = {
+    include "*MainSimulation.scala"
+  }
+}
+
 
 dependencies {
   compile 'org.scala-lang:scala-library:2.13.0'

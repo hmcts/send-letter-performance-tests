@@ -22,8 +22,8 @@ class EmbeddedPdfsSimulation extends Simulation {
         )
       )
       .inject(
-        rampUsers(50).over(5.seconds)
+        rampUsers(50).during(5.seconds)
       )
-  ).protocols(http.baseURL(config.getString("baseUrl")))
+  ).protocols(http.baseUrl(config.getString("baseUrl")))
 
 }

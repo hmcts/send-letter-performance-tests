@@ -22,7 +22,7 @@ class MainSimulation extends Simulation {
         )
       )
       .inject(
-        rampUsers(1000).over(20.minutes)
+        rampUsers(1000).during(20.minutes)
       )
-  ).protocols(http.baseURL(config.getString("baseUrl")))
+  ).protocols(http.baseUrl(config.getString("baseUrl")))
 }

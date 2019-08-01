@@ -34,7 +34,7 @@ object S2s {
                 |}
               """.stripMargin
             ))
-            .asJSON
+            .asJson
             .check(bodyString.saveAs("service_token"))
         )
       )

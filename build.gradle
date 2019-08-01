@@ -12,9 +12,9 @@ repositories {
 }
 
 gatling {
-  simulations = {
-    include "*MainSimulation.scala"
-  }
+  simulations = [
+    "uk.gov.hmcts.reform.sendletter.MainSimulation"
+  ]
 }
 
 

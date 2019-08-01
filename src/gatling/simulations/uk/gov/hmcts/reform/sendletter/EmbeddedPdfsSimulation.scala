@@ -11,10 +11,13 @@ class EmbeddedPdfsSimulation extends Simulation {
 
   val config: Config = ConfigFactory.load()
 
+  private val duration = config.getInt("duration_in_minutes")
+  private val serviceCount = config.getInt("service_count")
+
   setUp(
     scenario("Create letters v2")
       .exec(S2s.leaseServiceToken)
-      .during(5.minutes)(
+      .during(duration.minutes)(
         exec(
           LettersService.createV2,
           LettersService.checkStatus,
@@ -22,7 +25,7 @@ class EmbeddedPdfsSimulation extends Simulation {
         )
       )
       .inject(
-        rampUsers(50).during(5.seconds)
+        rampUsers(serviceCount).during(5.seconds)
       )
   ).protocols(http.baseUrl(config.getString("baseUrl")))
 

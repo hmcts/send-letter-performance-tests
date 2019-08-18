@@ -7,7 +7,7 @@ properties([
   ])
 ])
 
-@Library("Infrastructure") _
+@Library("Infrastructure")
 
 def channel = '#bsp-build-notices'
 

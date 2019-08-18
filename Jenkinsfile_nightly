@@ -9,6 +9,8 @@ properties([
 
 @Library("Infrastructure") _
 
+def channel = '#bsp-build-notices'
+
 withNightlyPipeline('java', 'rpe', 'send-letter') {
 
   env.BASE_URL = 'https://rpe-send-letter-service-perftest.service.core-compute-perftest.internal'
@@ -26,5 +28,6 @@ withNightlyPipeline('java', 'rpe', 'send-letter') {
     ]
   ])
 
+  enableSlackNotifications(channel)
   enablePerformanceTest()
 }

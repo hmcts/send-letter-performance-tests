@@ -19,7 +19,7 @@ withNightlyPipeline('java', 'rpe', 'send-letter') {
 
   setVaultName("rpe-send-letter")
   loadVaultSecrets([
-    [
+    's2s-#{env}': [
       $class     : 'AzureKeyVaultSecret',
       secretType : 'Secret',
       name       : 'test-s2s-secret',

@@ -17,7 +17,6 @@ withNightlyPipeline('java', 'rpe', 'send-letter') {
   env.S2S_URL = 'https://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal'
   env.SERVICE_NAME = 'send_letter_tests'
 
-  setVaultName("rpe-send-letter")
   loadVaultSecrets([
     's2s-#{env}': [
       $class     : 'AzureKeyVaultSecret',

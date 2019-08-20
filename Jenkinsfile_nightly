@@ -11,6 +11,10 @@ properties([
 
 def channel = '#bsp-build-notices'
 
+def vaultOverrides = [
+  'preview' : 'perftest'
+]
+
 withNightlyPipeline('java', 'rpe', 'send-letter') {
 
   env.BASE_URL = 'https://rpe-send-letter-service-perftest.service.core-compute-perftest.internal'
@@ -31,4 +35,5 @@ withNightlyPipeline('java', 'rpe', 'send-letter') {
 
   enableSlackNotifications(channel)
   enablePerformanceTest()
+  overrideVaultEnvironments(vaultOverrides)
 }

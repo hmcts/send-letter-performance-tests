@@ -17,8 +17,8 @@ def vaultOverrides = [
 
 withNightlyPipeline('java', 'rpe', 'send-letter') {
 
-  env.BASE_URL = 'https://rpe-send-letter-service-perftest.service.core-compute-perftest.internal'
-  env.S2S_URL = 'https://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal'
+  env.BASE_URL = 'http://rpe-send-letter-service-perftest.service.core-compute-perftest.internal'
+  env.S2S_URL = 'http://rpe-service-auth-provider-perftest.service.core-compute-perftest.internal'
   env.SERVICE_NAME = 'send_letter_tests'
 
   loadVaultSecrets([

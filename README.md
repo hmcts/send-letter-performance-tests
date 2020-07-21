@@ -4,7 +4,7 @@ Performance tests for [send-letter service](https://github.com/hmcts/send-letter
 
 ## Running
 By default, tests will run against send-letter service running locally.
-You can run ten using a gradle task:
+You can run them using a gradle task:
 
 ```bash
 ./gradlew gatlingRun

@@ -9,7 +9,7 @@ properties([
 
 @Library("Infrastructure")
 
-def channel = '#bsp-build-notices'
+def channel = '#bulk-print-build-notices'
 
 def vaultOverrides = [
   'preview' : 'perftest'

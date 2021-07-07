@@ -1,11 +1,15 @@
 plugins {
   id 'scala'
+  id 'java-gradle-plugin'
   id 'io.gatling.gradle' version '3.6.1'
   id 'org.owasp.dependencycheck' version '6.2.2'
 }
 
 group 'uk.gov.hmcts.reform'
 version '0.1.0'
+
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
   mavenCentral()

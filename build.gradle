@@ -1,14 +1,14 @@
 plugins {
   id 'scala'
-  id 'com.github.lkishalmi.gatling' version '3.3.4'
+  id 'io.gatling.gradle' version '3.6.1'
   id 'org.owasp.dependencycheck' version '6.2.2'
 }
 
 group 'uk.gov.hmcts.reform'
-version '0.0.1'
+version '0.1.0'
 
 repositories {
-  jcenter()
+  mavenCentral()
 }
 
 gatling {

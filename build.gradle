@@ -1,6 +1,6 @@
 plugins {
   id 'scala'
-  id 'com.github.lkishalmi.gatling' version '3.0.2'
+  id 'com.github.lkishalmi.gatling' version '3.3.4'
   id 'org.owasp.dependencycheck' version '6.2.2'
 }
 
@@ -12,13 +12,13 @@ repositories {
 }
 
 gatling {
-  simulations = [
+  simulations = {
     "uk.gov.hmcts.reform.sendletter.EmbeddedPdfsSimulation"
-  ]
+  }
 }
 
 
 dependencies {
-  compile 'org.scala-lang:scala-library:2.13.6'
-  gatlingCompile 'com.warrenstrange:googleauth:1.2.0'
+  implementation group: 'org.scala-lang', name: 'scala-library', version: '2.13.6'
+  gatlingImplementation group: 'com.warrenstrange', name: 'googleauth', version: '1.5.0'
 }

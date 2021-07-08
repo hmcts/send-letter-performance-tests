@@ -23,6 +23,7 @@ class PdfWithCopiesSimulation extends Simulation {
           LettersService.createV3,
           pause(5.seconds, 10.seconds)
         ).tryMax(maxRetry) {
+            pause(2.seconds, 5.seconds)
             exec(LettersService.checkStatus)
         }.exitHereIfFailed
       )

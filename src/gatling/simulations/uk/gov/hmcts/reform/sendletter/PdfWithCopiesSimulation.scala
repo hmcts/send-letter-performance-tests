@@ -13,6 +13,7 @@ class PdfWithCopiesSimulation extends Simulation {
 
   private val duration = config.getInt("duration_in_minutes")
   private val serviceCount = config.getInt("service_count")
+  private val maxRetry = config.getInt("max_retry")
 
   setUp(
     scenario("Create letters v3")
@@ -20,10 +21,10 @@ class PdfWithCopiesSimulation extends Simulation {
       .during(duration.minutes)(
         exec(
           LettersService.createV3,
-          pause(5.seconds, 10.seconds),
-          LettersService.checkStatus,
           pause(5.seconds, 10.seconds)
-        )
+        ).tryMax(maxRetry) {
+            exec(LettersService.checkStatus)
+        }.exitHereIfFailed
       )
       .inject(
         rampUsers(serviceCount).during(5.seconds)

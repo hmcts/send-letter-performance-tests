@@ -12,5 +12,5 @@
   ],
   "case_id": "${uuid}",
   "case_ref": "1234",
-  "letter_type": "smoke_test"
+  "letter_type": "performanceTest"
 }

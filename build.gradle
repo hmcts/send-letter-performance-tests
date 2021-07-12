@@ -14,7 +14,8 @@ repositories {
 gatling {
   simulations = [
     "uk.gov.hmcts.reform.sendletter.EmbeddedPdfsSimulation",
-    "uk.gov.hmcts.reform.sendletter.PdfWithCopiesSimulation"
+    "uk.gov.hmcts.reform.sendletter.PdfWithCopiesSimulation",
+    "uk.gov.hmcts.reform.sendletter.PrintSimulation"
   ]
 }
 

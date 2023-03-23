@@ -1,7 +1,7 @@
 plugins {
   id 'scala'
   id 'com.github.lkishalmi.gatling' version '3.0.2'
-  id 'org.owasp.dependencycheck' version '8.0.2'
+  id 'org.owasp.dependencycheck' version '8.2.1'
 }
 
 group 'uk.gov.hmcts.reform'

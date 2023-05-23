@@ -1,6 +1,6 @@
 #!groovy
 properties([
-  pipelineTriggers([cron('H 07 * * 1-5')]),
+  pipelineTriggers([cron('H 07 * * 07-07')]),
   parameters([
     string(name: 'DURATION_IN_MINUTES', defaultValue: '5', description: 'Test duration (in minutes)'),
     string(name: 'SERVICE_COUNT', defaultValue: '5', description: 'Number of concurrent services')

@@ -20,6 +20,6 @@ gatling {
 
 
 dependencies {
-  compile 'org.scala-lang:scala-library:2.13.10'
+  compile 'org.scala-lang:scala-library:2.13.11'
   gatlingCompile 'com.warrenstrange:googleauth:1.2.0'
 }
